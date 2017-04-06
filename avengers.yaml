@@ -53,6 +53,25 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Hero'
+  /missions/{mission_id}:
+    get:
+      summary: Retrieve a mission.
+      description: Retrieves the details of a mission that has been previously created.
+      parameters:
+        - name: mission_id
+          in: path
+          description: A unique identifier of the mission.
+          required: true
+          type: integer
+      tags:
+        - Avengers
+      responses:
+        200:
+          description: Returns a mission object in JSON format if valid identifier was provided.
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Mission'
 
 definitions:
   Hero:
@@ -75,21 +94,19 @@ definitions:
         type: integer
         description: Count of the completed missions by the hero.
   Mission:
-    description: One Avenger who is available (currently not on a mission) to work for you.
+    description: One of the missions, which the hero is going to go on for you.
     type: object
     properties:
       id:
         type: integer
-        description: Unique identifier of the hero.
-      name:
-        type: string
-        description: Publicly vicible name of the hero.
-      first_name:
-        type: string
-        description: Hidden actual first name of the hero.
-      last_name:
-        type: string
-        description: Hidden actual last name of the hero.
-      missions_completed:
+        description: Unique identifier of the mission.
+      hero_id:
         type: integer
-        description: Count of the completed missions by the hero.
+        description: Unique identifier of the hero going on a mission for you.
+      description:
+        type: string
+        description: Mission descrpition.
+      add_time:
+        type: string
+        format: YYYY-mm-dd
+        description: Information of when the mission was created.
