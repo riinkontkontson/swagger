@@ -72,7 +72,27 @@ paths:
             type: object
             items:
               $ref: '#/definitions/Mission'
-
+  /missions:
+    post:
+      summary: Create a mission.
+      description: Creates a new mission for an existing hero.
+      parameters:
+        - name: hero_id
+          in: body
+          description: A unique identifier of the hero going on a mission.
+          required: true
+          schema:
+            $ref: '#/definitions/Mission_post'
+      tags:
+        - Avengers
+      responses:
+        200:
+          description: Returns a mission object in JSON format if valid object was successfully created.
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Mission'
+      
 definitions:
   Hero:
     description: One Avenger who is available (currently not on a mission) to work for you.
@@ -110,3 +130,13 @@ definitions:
         type: string
         format: YYYY-mm-dd
         description: Information of when the mission was created.
+  Mission_post:
+    description: One of the missions, which the hero is going to go on for you.
+    type: object
+    properties:
+      hero_id:
+        type: integer
+        description: Unique identifier of the hero going on a mission for you.
+      description:
+        type: string
+        description: Mission descrpition.
